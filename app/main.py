@@ -1,16 +1,22 @@
-# This is a sample Python script.
+from fastapi import FastAPI
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press ⌘F8 to toggle the breakpoint.
+from app.routers import categories
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+# Создаём приложение FastAPI
+app = FastAPI(
+    title="FastAPI Интернет-магазин",
+    version="0.1.0",
+)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+# Подключаем маршруты категорий
+app.include_router(categories.router)
+
+
+# Корневой эндпоинт для проверки
+@app.get("/")
+async def root():
+    """
+    Корневой маршрут, подтверждающий, что API работает.
+    """
+    return {"message": "Добро пожаловать в API интернет-магазина!"}
