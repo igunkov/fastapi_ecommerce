@@ -1,6 +1,6 @@
 from fastapi import FastAPI
-
 from app.routers import categories, products
+
 
 
 # Создаём приложение FastAPI
@@ -21,3 +21,7 @@ async def root():
     Корневой маршрут, подтверждающий, что API работает.
     """
     return {"message": "Добро пожаловать в API интернет-магазина!"}
+
+
+from fastapi.staticfiles import StaticFiles
+app.mount("/static", StaticFiles(directory="static"), name="static")
